@@ -1,0 +1,9 @@
+# Réponses et indices en clair : ne jamais publier
+tools/secrets.json
+
+.DS_Store
+node_modules/
+
+# Photos privées : seules leurs versions chiffrées (enc/) sont publiées
+data/moi.png
+data/fabian.jpeg

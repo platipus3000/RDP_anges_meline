@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qui suis-je ?</title>
+  <meta name="description" content="Cinq épreuves. Cinq indices. Une identité à deviner.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕵️</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="marquee" aria-hidden="true">
+    <span>★ ☆ ★ Bienvenue sur ma page perso !!! ★ ☆ ★ Réussis les 5 épreuves pour découvrir QUI JE SUIS ★ ☆ ★ Bonne chance ;-) ★ ☆ ★</span>
+  </div>
+
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow"><span class="blink">NEW !</span> Une enquête rien que pour toi</p>
+      <h1>~*~ Qui suis-je&nbsp;? ~*~</h1>
+      <p class="tagline">Cinq épreuves. Cinq indices. Une identité à deviner.</p>
+    </header>
+
+    <div class="window">
+      <div class="titlebar"><span>🔍 progression.exe</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <ol class="progress" id="progress" aria-label="Progression"></ol>
+      </div>
+    </div>
+
+    <section class="window" id="riddle-card" hidden aria-live="polite">
+      <div class="titlebar"><span id="riddle-kicker"></span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <h2 id="riddle-title"></h2>
+        <figure class="riddle-picture" id="riddle-picture" hidden>
+          <img id="riddle-picture-img" alt="">
+        </figure>
+        <p class="question" id="riddle-question"></p>
+
+        <ol class="qcm" id="qcm" hidden></ol>
+
+        <div class="game" id="game-block" hidden>
+          <p class="goal" id="game-goal"></p>
+          <canvas class="game-canvas" id="game-canvas" width="600" height="170" tabindex="0"></canvas>
+        </div>
+
+        <form id="answer-form" autocomplete="off" novalidate>
+          <label for="answer-input" class="visually-hidden">Ta réponse</label>
+          <div class="answer-row">
+            <input id="answer-input" name="answer" type="text" placeholder="Ta réponse…"
+                   autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send">
+            <button type="submit" id="answer-submit">Valider &gt;&gt;</button>
+          </div>
+        </form>
+
+        <p class="feedback" id="feedback" role="status"></p>
+
+        <div class="hint" id="hint-block" hidden>
+          <button type="button" class="link-button" id="hint-toggle" aria-expanded="false">Besoin d'un coup de pouce&nbsp;? Clique ici !</button>
+          <p class="hint-text" id="hint-text" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="window finale" id="finale" hidden>
+      <div class="titlebar"><span>🏆 FÉLICITATIONS !!!</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <h2 class="rainbow">Enquête terminée !</h2>
+        <p>Tu as tous les indices en main.</p>
+        <p>Relis-les bien… Alors, <b>qui suis-je&nbsp;?</b></p>
+
+        <div class="arcade" id="arcade" hidden>
+          <h3>🕹️ Salle d'arcade</h3>
+          <p>Envie de rejouer&nbsp;? Choisis ton jeu&nbsp;:</p>
+          <div class="arcade-buttons" id="arcade-buttons"></div>
+          <div id="arcade-game" hidden>
+            <p class="goal" id="arcade-goal"></p>
+            <canvas class="game-canvas" id="arcade-canvas" width="600" height="170" tabindex="0"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="window notebook" aria-labelledby="notebook-title">
+      <div class="titlebar"><span id="notebook-title">📓 carnet_d_indices.txt - Bloc-notes</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <ol class="clues" id="clues"></ol>
+      </div>
+    </section>
+
+    <section class="window who" id="who-window" hidden aria-labelledby="who-title">
+      <div class="titlebar"><span id="who-title">❓ c_est_toi.exe</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <p>Tu crois savoir qui je suis&nbsp;? Écris mon prénom, à n'importe quel moment&nbsp;!</p>
+        <form id="who-form" autocomplete="off" novalidate>
+          <label for="who-input" class="visually-hidden">Mon prénom</label>
+          <div class="answer-row">
+            <input id="who-input" type="text" placeholder="Mon prénom…"
+                   autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="send">
+            <button type="submit">C'est toi&nbsp;?</button>
+          </div>
+        </form>
+        <p class="feedback" id="who-feedback" role="status"></p>
+      </div>
+    </section>
+
+    <p class="error window-body" id="load-error" hidden></p>
+
+    <footer class="footer">
+      <p class="counter">Tu es le visiteur n° <span class="digits">000001</span></p>
+      <p class="badges" aria-hidden="true">
+        <span class="badge88">Best viewed with<br><b>Netscape 4</b></span>
+        <span class="badge88">800×600<br><b>16 bits</b></span>
+        <span class="badge88 construction">🚧 Site en<br><b>construction</b></span>
+      </p>
+      <button type="button" class="link-button" id="reset">Recommencer depuis le début</button>
+      <p class="copyright">© 2001 – Dernière mise à jour : aujourd'hui</p>
+    </footer>
+  </main>
+
+  <!-- Pop-up affichée à la fin d'un QCM (on ne peut la fermer qu'avec le bouton) -->
+  <dialog class="window popup" id="popup" aria-labelledby="popup-text">
+    <div class="titlebar"><span>💬 Question importante</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+    <div class="window-body">
+      <img id="popup-img" alt="">
+      <p id="popup-text"></p>
+      <button type="button" class="win-button" id="popup-ok"></button>
+    </div>
+  </dialog>
+
+  <!-- Révélation quand on devine le prénom : photo + confettis -->
+  <dialog class="celebrate" id="celebrate" aria-labelledby="celebrate-title">
+    <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+    <div class="window">
+      <div class="titlebar"><span>🎉 BRAVO !!!</span><span class="titlebar-buttons" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="window-body">
+        <h2 class="rainbow" id="celebrate-title"></h2>
+        <img id="celebrate-img" alt="Photo de moi">
+        <button type="button" class="win-button" id="celebrate-close">Fermer</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Images de l'énigme, qui flottent et rebondissent sur tout l'écran -->
+  <div class="floating-gifs" id="floating-gifs" aria-hidden="true"></div>
+
+  <script src="dino.js"></script>
+  <script src="hill.js"></script>
+  <script src="devil.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

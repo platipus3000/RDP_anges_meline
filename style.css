@@ -1,0 +1,560 @@
+/* ~*~ Style « page perso des années 2000 » ~*~ */
+
+:root {
+  --sky: #aee4ff;
+  --win: #c0c0c0;
+  --win-light: #ffffff;
+  --win-mid: #dfdfdf;
+  --win-dark: #808080;
+  --win-darker: #000000;
+  --title-from: #000080;
+  --title-to: #1084d0;
+  --ink: #000000;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --success: #008000;
+  --error: #ff0000;
+  --yellow: #ffff00;
+  --pixel: "Tahoma", "Verdana", "MS Sans Serif", "Geneva", sans-serif;
+  --fun: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive;
+  --mono: "Courier New", Courier, monospace;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 15px/1.45 var(--pixel);
+  background-color: var(--sky);
+}
+
+/* Fond d'écran façon bureau Windows XP. Calque fixe plutôt que
+   background-attachment: fixed, qui fonctionne mal sur mobile. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--sky) url("wallpaper.jpg") center bottom / cover no-repeat;
+}
+
+/* Textes posés directement sur le fond d'écran */
+.hero, .footer { text-shadow: 1px 1px 0 #000, 0 0 6px rgba(0, 0, 0, .6); }
+
+::selection { background: var(--title-from); color: #fff; }
+
+/* Bandeau défilant */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--yellow);
+  color: #ff0000;
+  border-bottom: 2px solid #000;
+  font: bold 14px/28px var(--fun);
+}
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 18s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* En-tête */
+.hero { text-align: center; color: #fff; }
+.eyebrow {
+  margin: 0 0 6px;
+  font: bold 14px var(--fun);
+  color: #ffff00;
+}
+.blink {
+  display: inline-block;
+  padding: 0 4px;
+  background: #ff0000;
+  color: var(--yellow);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { visibility: hidden; } }
+
+h1 {
+  margin: 0;
+  font: bold clamp(32px, 8.5vw, 50px)/1.15 var(--fun);
+  color: #ffff00;
+  -webkit-text-stroke: 1.5px #000080;
+  text-shadow: 3px 3px 0 #ff00ff, 6px 6px 0 #0000ff;
+  letter-spacing: 1px;
+}
+.tagline {
+  margin: 10px 0 0;
+  font: 16px var(--fun);
+  color: #fff;
+}
+
+/* Fenêtres Windows 98 */
+.window {
+  background: var(--win);
+  padding: 3px;
+  box-shadow:
+    inset -1px -1px var(--win-darker),
+    inset 1px 1px var(--win-mid),
+    inset -2px -2px var(--win-dark),
+    inset 2px 2px var(--win-light);
+}
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 3px 3px 6px;
+  background: linear-gradient(90deg, var(--title-from), var(--title-to));
+  color: #fff;
+  font: bold 13px var(--pixel);
+}
+.titlebar > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.titlebar-buttons { display: flex; gap: 2px; flex: none; }
+.titlebar-buttons i {
+  width: 16px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  font: bold 10px/1 var(--pixel);
+  font-style: normal;
+  color: #000;
+  background: var(--win);
+  box-shadow:
+    inset -1px -1px var(--win-darker),
+    inset 1px 1px var(--win-light),
+    inset -2px -2px var(--win-dark);
+}
+.window-body { padding: 14px 12px 12px; }
+
+.window h2 {
+  margin: 0 0 10px;
+  font: bold 22px/1.25 var(--fun);
+  color: var(--title-from);
+}
+.question {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  background: #ffffe1;
+  border: 1px solid #000;
+  font: 16px/1.55 var(--mono);
+  white-space: pre-line;
+}
+
+/* Barre de progression façon copie de fichiers */
+.progress {
+  list-style: none;
+  margin: 0;
+  padding: 3px;
+  display: flex;
+  gap: 3px;
+  background: #fff;
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-dark),
+    inset -2px -2px var(--win-mid),
+    inset 2px 2px var(--win-darker);
+}
+.progress li {
+  flex: 1;
+  height: 20px;
+  background: transparent;
+}
+.progress li.done {
+  background: repeating-linear-gradient(90deg, var(--title-from) 0 14px, transparent 14px 17px);
+}
+.progress li.current {
+  background: repeating-linear-gradient(90deg, var(--title-to) 0 14px, transparent 14px 17px);
+  animation: blink 1.2s steps(1) infinite;
+}
+
+/* Images de l'énigme : elles flottent par-dessus la page sans bloquer les clics. */
+.floating-gifs {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+.floating-gifs img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(80px, 22vw, 150px);
+  height: auto;
+  background: #000;
+  border: 3px ridge var(--win);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .35);
+  will-change: transform;
+}
+
+/* Image affichée dans l'énigme */
+.riddle-picture {
+  margin: 0 0 14px;
+  padding: 10px;
+  text-align: center;
+  background: #fff;
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-dark),
+    inset -2px -2px var(--win-mid),
+    inset 2px 2px var(--win-darker);
+}
+.riddle-picture img {
+  display: inline-block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Pop-up */
+.popup {
+  width: min(320px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 3px;
+  border: 0;
+  color: var(--ink);
+}
+.popup::backdrop { background: rgba(0, 0, 40, .55); }
+.popup .window-body { text-align: center; }
+.popup img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 12px;
+  border: 2px inset var(--win-dark);
+}
+.popup p { margin: 0 0 14px; font: bold 19px var(--fun); }
+.popup .win-button { min-width: 110px; }
+
+/* « Qui suis-je ? » */
+.who p:first-child { margin: 0 0 10px; font: 15px var(--fun); }
+.who .feedback { margin-top: 8px; }
+
+/* Révélation : photo + confettis */
+.celebrate {
+  width: min(380px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.celebrate::backdrop { background: rgba(0, 0, 40, .6); }
+.celebrate .window { position: relative; z-index: 0; }
+.celebrate .window-body { text-align: center; }
+.celebrate h2 { margin: 0 0 12px; font-size: 22px; }
+.celebrate img {
+  display: block;
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  margin: 0 0 12px;
+  background: #000;
+  border: 2px inset var(--win-dark);
+}
+.confetti {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Image jointe à un indice (dans le carnet) */
+.clue-picture { margin: 8px 0 0; }
+.clue-picture img {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  border: 2px inset var(--win-dark);
+}
+.clue-picture figcaption {
+  margin-top: 4px;
+  font: bold italic 14px var(--fun);
+  color: var(--title-from);
+}
+
+/* QCM */
+.qcm {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.qcm .win-button {
+  width: 100%;
+  text-align: left;
+  font: bold 15px var(--fun);
+}
+.qcm .num {
+  display: inline-block;
+  min-width: 1.6em;
+  color: var(--title-from);
+}
+.qcm .win-button.wrong {
+  color: var(--win-dark);
+  text-decoration: line-through;
+  text-decoration-color: var(--error);
+  text-decoration-thickness: 2px;
+}
+.qcm .win-button.wrong .num { color: var(--error); }
+
+/* Jeu du dinosaure */
+.goal { margin: 0 0 8px; font: bold 15px var(--fun); }
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-dark);
+  border: 2px inset var(--win-dark);
+}
+.game-canvas:focus-visible { outline: 1px dotted #000; outline-offset: 2px; }
+
+/* Formulaire */
+.answer-row { display: flex; gap: 8px; }
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 8px;
+  font: 16px var(--mono);
+  color: #000;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-dark),
+    inset -2px -2px var(--win-mid),
+    inset 2px 2px var(--win-darker);
+}
+input[type="text"]:focus { background: #ffffcc; }
+
+button[type="submit"], .win-button {
+  min-width: 100px;
+  padding: 6px 14px;
+  font: bold 14px var(--pixel);
+  color: #000;
+  background: var(--win);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow:
+    inset -1px -1px var(--win-darker),
+    inset 1px 1px var(--win-light),
+    inset -2px -2px var(--win-dark),
+    inset 2px 2px var(--win-mid);
+}
+button[type="submit"]:active, .win-button:active, .win-button[aria-pressed="true"] {
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-darker),
+    inset -2px -2px var(--win-mid),
+    inset 2px 2px var(--win-dark);
+  padding: 7px 13px 5px 15px;
+}
+button[type="submit"]:focus-visible, .win-button:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+button:disabled { color: var(--win-dark); text-shadow: 1px 1px #fff; cursor: wait; }
+
+.feedback {
+  min-height: 1.45em;
+  margin: 10px 0 0;
+  font: bold 15px var(--fun);
+}
+.feedback.error { color: var(--error); }
+.feedback.error::before { content: "⚠ "; }
+.feedback.success { color: var(--success); }
+.feedback.success::before { content: "✔ "; }
+
+.shake { animation: shake .35s; }
+@keyframes shake {
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.hint { margin-top: 8px; }
+.hint-text {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: #ffffe1;
+  border: 1px solid #000;
+  font: italic 14px var(--fun);
+}
+
+.link-button {
+  padding: 0;
+  font: 14px var(--pixel);
+  color: var(--link);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-button:hover { color: #ff0000; }
+.link-button:visited, .link-button[aria-expanded="true"] { color: var(--visited); }
+
+/* Écran final */
+.finale .window-body { text-align: center; }
+.finale p { margin: 6px 0; font: 16px var(--fun); }
+
+/* Salle d'arcade (après la fin) */
+.arcade {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 2px groove var(--win-light);
+}
+.arcade h3 { margin: 0 0 4px; font: bold 18px var(--fun); color: var(--title-from); }
+.arcade-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+.win-button[aria-pressed="true"] { background: var(--win-mid); }
+.rainbow {
+  background: linear-gradient(90deg, #ff0000, #ff8000, #e0c000, #00a000, #0000ff, #8000ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* Carnet d'indices (Bloc-notes) */
+.notebook .window-body {
+  margin: 3px;
+  padding: 10px;
+  background: #fff;
+  box-shadow:
+    inset -1px -1px var(--win-light),
+    inset 1px 1px var(--win-dark),
+    inset -2px -2px var(--win-mid),
+    inset 2px 2px var(--win-darker);
+}
+.clues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font: 15px/1.5 var(--mono);
+}
+.clue {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--win-dark);
+}
+.clue .badge {
+  flex: none;
+  min-width: 28px;
+  text-align: center;
+  font-weight: bold;
+}
+.clue p { margin: 0; }
+.clue.unlocked { color: #000; }
+.clue.unlocked .badge { color: var(--success); }
+.clue.unlocked .badge::before { content: "["; }
+.clue.unlocked .badge::after { content: "]"; }
+.clue.fresh p { animation: reveal 1.2s ease-out; }
+@keyframes reveal {
+  0%, 30%, 60% { background: var(--yellow); }
+  15%, 45%, 100% { background: transparent; }
+}
+
+.error {
+  background: var(--win);
+  color: var(--error);
+  font-weight: bold;
+  border: 2px solid #000;
+}
+.error::before { content: "⛔ Erreur : "; }
+
+/* Pied de page */
+.footer {
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+}
+.footer p { margin: 0 0 12px; }
+.counter { font: 14px var(--fun); }
+.digits {
+  display: inline-block;
+  padding: 1px 6px;
+  background: #000;
+  color: #00ff00;
+  border: 2px inset #808080;
+  font: bold 16px var(--mono);
+  letter-spacing: 3px;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.badge88 {
+  width: 88px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  font: 9px/1.1 var(--pixel);
+  color: #fff;
+  background: linear-gradient(#333, #000);
+  border: 1px solid #888;
+}
+.badge88 b { color: var(--yellow); }
+.badge88.construction {
+  color: #000;
+  background: repeating-linear-gradient(45deg, var(--yellow) 0 6px, #000 6px 12px);
+}
+.badge88.construction b, .badge88.construction { text-shadow: 0 0 2px #fff, 0 0 2px #fff; }
+.footer .link-button { color: #ffff00; }
+.footer .link-button:hover { color: #fff; }
+.copyright { margin-top: 12px !important; color: #eee; font-size: 11px; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+[hidden] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .marquee span { padding-left: 16px; }
+}
