@@ -31,7 +31,7 @@ Une petite application web, pensée pour **une seule personne** : celle qui ne m
 - 5 épreuves à réussir dans l'ordre : une énigme, un QCM piégé et trois mini-jeux
 - Un indice par énigme réussie
 - Une fois l'enquête terminée, une « salle d'arcade » permet de rejouer aux mini-jeux
-- À tout moment, une fenêtre permet de tenter mon prénom : si c'est le bon, ma photo apparaît sous une pluie de confettis
+- Une fois toutes les épreuves terminées, une fenêtre permet de tenter mon prénom : si c'est le bon, ma photo apparaît sous une pluie de confettis
 - Un indice peut être accompagné d'une photo (avec une légende)
 - Réponses tolérantes (majuscules, accents et espaces ignorés)
 - Progression sauvegardée dans le navigateur (on peut fermer l'onglet et revenir)
@@ -114,7 +114,7 @@ Le fichier contient la liste des énigmes (`riddles`) et, en option, le prénom 
 }
 ```
 
-`identity` active la fenêtre « c_est_toi.exe » : à tout moment, la personne peut taper un prénom. S'il fait partie de `answers` (après normalisation : « remi », « RÉMI » et « Rémi ! » se valent), une pop-up s'ouvre avec des confettis, `title` et la photo `image`.
+`identity` active la fenêtre « c_est_toi.exe », qui apparaît une fois toutes les épreuves terminées : la personne peut alors taper un prénom. S'il fait partie de `answers` (après normalisation : « remi », « RÉMI » et « Rémi ! » se valent), une pop-up s'ouvre avec des confettis, `title` et la photo `image`.
 
 Chaque énigme de `riddles` ressemble à ceci :
 
@@ -189,7 +189,7 @@ Le script produit `riddles.json` avec les empreintes et les indices chiffrés, a
 `clueImage` affiche une photo sous l'indice dans le carnet, avec `title` en légende. La photo est chiffrée dans `enc/` et ne peut être lue qu'une fois l'indice débloqué :
 
 ```json
-"clueImage": { "file": "data/fabian.jpeg", "title": "Le canard en plastique" }
+"clueImage": { "file": "data/fabian.jpeg", "title": "Le collègue de bureau" }
 ```
 
 > 🔐 Les photos privées (celle du prénom, celles des indices) ne doivent pas être publiées en clair : ajoute leur original à `.gitignore` (c'est déjà fait pour `data/moi.png` et `data/fabian.jpeg`).

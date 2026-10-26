@@ -186,6 +186,7 @@
     );
 
     els.finale.hidden = !done;
+    els.whoWindow.hidden = !done || identity.length === 0;
     els.card.hidden = done;
     els.reset.hidden = Object.keys(progress.clues).length === 0;
 
@@ -687,7 +688,6 @@
       const data = await response.json();
       riddles = Array.isArray(data) ? data : data.riddles;
       identity = Array.isArray(data) ? [] : data.identity || [];
-      els.whoWindow.hidden = identity.length === 0;
       if (!Array.isArray(riddles) || riddles.length === 0) throw new Error("Aucune énigme");
     } catch (err) {
       console.error(err);
