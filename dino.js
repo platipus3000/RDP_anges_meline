@@ -13,10 +13,10 @@
   const JUMP = 760;       // vitesse initiale du saut, px/s
   const SHORT_HOP = 320;  // vitesse plafond si on relâche tôt (petit saut)
   const FAST_FALL = 3000; // px/s² en plus si on se baisse en l'air
-  const SPEED_START = 420;
-  const SPEED_MAX = 900;
-  const ACCEL = 14;       // px/s gagnés chaque seconde
-  const BIRDS_FROM = 150; // score à partir duquel les oiseaux arrivent
+  const SPEED_START = 340;
+  const SPEED_MAX = 660;
+  const ACCEL = 8;        // px/s gagnés chaque seconde
+  const BIRDS_FROM = 300; // score à partir duquel les oiseaux arrivent
   // Altitudes des oiseaux (bas de l'oiseau au-dessus du sol) :
   // bas = il faut sauter, milieu = il faut se baisser, haut = il passe au-dessus
   // de la tête… sauf si on saute.
@@ -137,11 +137,11 @@
     }
 
     function spawnObstacle() {
-      if (distance * POINTS_PER_PX > BIRDS_FROM && Math.random() < 0.3) {
+      if (distance * POINTS_PER_PX > BIRDS_FROM && Math.random() < 0.2) {
         const alt = BIRD_ALTS[Math.floor(Math.random() * BIRD_ALTS.length)];
         obstacles.push({ kind: "bird", x: W + 10, w: 34, top: GROUND - alt - 22, bottom: GROUND - alt });
       } else {
-        const count = speed > 430 && Math.random() < 0.45 ? (Math.random() < 0.45 ? 3 : 2) : 1;
+        const count = speed > 480 && Math.random() < 0.3 ? (Math.random() < 0.3 ? 3 : 2) : 1;
         const big = Math.random() < 0.5;
         const unitW = big ? 22 : 15;
         const h = big ? rand(40, 48) : rand(28, 34);
@@ -149,7 +149,7 @@
       }
       // Écart minimal : de quoi retomber et ressauter, même à pleine vitesse.
       const airTime = (2 * JUMP) / GRAVITY;
-      nextGap = speed * airTime * 1.05 + rand(0, speed * 0.6);
+      nextGap = speed * airTime * 1.35 + rand(0, speed * 0.8);
     }
 
     // Boîtes de collision en unités de sprite (debout : tête + corps ; baissé : une seule).

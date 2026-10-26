@@ -20,8 +20,8 @@
   const REVERSE_SPEED = 160;
   const BRAKE = 1100;
   const SPIN = 9;           // accélération angulaire en l'air (rad/s²)
-  const FUEL_DRAIN = 4.5;   // % par seconde (un plein ≈ 22 s)
-  const FUEL_EVERY = 2400;  // un bidon tous les 120 m
+  const FUEL_DRAIN = 3;     // % par seconde (un plein ≈ 33 s)
+  const FUEL_EVERY = 2000;  // un bidon tous les 100 m
   const START_X = 120;
   const FLAT = 520;         // début de piste plat
 
@@ -30,12 +30,12 @@
   function ground(x) {
     if (x < FLAT) return 0;
     const t = x - FLAT;
-    const grow = Math.min(1, t / 700) * Math.min(1.8, 1 + t / 3000);
+    const grow = Math.min(1, t / 700) * Math.min(1.4, 1 + t / 4000);
     return -grow * (
-      52 * Math.sin(t / 210) +
-      22 * Math.sin(t / 83 + 1.3) +
-      8 * Math.sin(t / 37 + 0.4)
-    ) - t * 0.05; // la piste monte doucement dans l'ensemble
+      38 * Math.sin(t / 210) +
+      14 * Math.sin(t / 83 + 1.3) +
+      4 * Math.sin(t / 37 + 0.4)
+    ) - t * 0.035; // la piste monte doucement dans l'ensemble
   }
   const slope = (x) => (ground(x + 1) - ground(x - 1)) / 2;
 
